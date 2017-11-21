@@ -1,0 +1,42 @@
+.box{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 500px;
+    height: 300px;
+    background: pink;
+    border-radius: 15px;
+    text-align: center;
+    display: none;
+    box-shadow: 0 0 5px #CCC;
+}
+.main{
+    width: 400px;
+    height: 150px;
+    background: #CCC;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.btn{
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+}
+.btn button{
+    width: 80px;
+    cursor: pointer;
+}
+#coo{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    font-size: 18px;
+}

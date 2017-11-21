@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="css/swiper.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="css/reset.css"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header>
+    <p><img src="images/img.jpg" alt=""></p>
+    <span>消息</span>
+    <p class="plus">＋</p>
+</header>
+<section id="app">
+    <div class="top">
+        <div class="search">
+            <span v-show="search"><i class="fa fa-search"></i>搜索</span>
+            <input type="text" @focus="focusChange">
+        </div>
+    </div>
+</section>
+<footer>
+    <ul>
+        <li class="active">
+            <i class="fa fa-heart"></i>
+            <span>消息</span>
+        </li>
+        <li>
+            <i class="fa fa-user-o"></i>
+            <span>联系人</span>
+        </li>
+        <li>
+            <i class="fa fa-star-o"></i>
+            <span>动态</span>
+        </li>
+    </ul>
+</footer>
+
+</body>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            search: true
+        },
+        methods: {
+            focusChange () {
+                this.search =! this.search;
+            }
+        }
+    })
+</script>
+</html>

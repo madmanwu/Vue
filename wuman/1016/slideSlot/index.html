@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #app{
+            width: 450px;
+            height:250px;
+            margin: 100px auto
+        }
+        .banner-box{
+            width: 450px;
+            height:250px;
+            position: relative;
+            overflow: hidden
+        }
+        .banner-box ul{
+            position: absolute;
+            left: 50%;
+            margin-left: -135px;
+            bottom: 10px;
+            height: 20px;
+        }
+        .banner-box ul li{
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            float: left;
+            border-radius: 50%;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: #fff
+        }
+        .banner-box ul .active{
+            background: skyblue
+        }
+        .banner{
+            width: 4050px;
+            height: 250px;
+        }
+        .arrow span{
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.5);
+            color: #fff;
+            top: 50%;
+            margin-top: -40px;
+            font-size: 30px;
+            text-align: center;
+            line-height: 80px;
+            font-weight: bolder
+        }
+        .arrow .left{
+            left: 0
+        }
+        .arrow .right{
+            right: 0
+        }
+        img{
+            width: 450px;
+            height:250px;
+            float: left
+        }
+    </style>
+</head>
+<body>
+    <div id="app" >
+        <my-child :todo="imgs" >
+            <template slot="index" scope="props">
+                <ul>
+                    <li  v-for="(i, index) in props.text.length"  :class="currentIndex===index? 'active': ''" v-on:click="props.ev(index)">{{i}}</li>
+                </ul>
+                <div slot="arrow" class="arrow">
+                    <span class="left" v-on:click="props.prev">&lt</span>
+                    <span class="right" v-on:click="props.next">&gt</span>
+                </div>
+            </template>
+        </my-child>
+    </div>
+</body>
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript" src="./js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="./js/slide.js">
+</script>
+</html>

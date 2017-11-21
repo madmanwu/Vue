@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css" lang="">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .clearfix {
+            content: '';
+            clear: both;
+            display: block;
+        }
+        #app {
+            width: 500px;
+            height: 300px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .slide {
+            width: 500px;
+            height: 300px;
+        }
+        li {
+            position: absolute
+        }
+        img {
+            width: 500px;
+            height: 300px;
+        }
+        .bullet {
+            width: 100%;
+            position: absolute;
+            bottom: 10px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 10;
+        }
+        span {
+            width: 20px;
+            height: 5px;
+            border: 1px solid;
+            background: white;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .active {
+            background: red;
+        }
+        .image-enter-active {
+            transform: translateX(0);
+            transition: all 1s ease;
+        }
+        .image-leave-active {
+            transform: translateX(-100%);
+            transition: all 1s ease;
+        }
+        .image-enter {
+            transform: translateX(100%)
+        }
+        .image-leave {
+            transform: translateX(0)
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition-group tag='ul' class="clearfix slide" name='image'>
+            <li v-for='(v, k) in img' :key='k' v-show='k===mark'>
+                <a><img :src="v"></a>
+            </li>
+        </transition-group>
+        <div class="bullet">
+            <span v-for='(v, k) in img.length' :class="{'active':k===mark}" @click='change(k)'></span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="./vue.min.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            mark: 0,
+            timer: null,
+            img: ['images/img1.jpg',
+                'images/img2.jpg',
+                'images/img3.jpg',
+                'images/img4.jpg'
+            ]
+        },
+        created() {
+            this.play()
+        },
+        methods: {
+            change(i) {
+                this.mark = i
+            },
+            autoPlay() {
+                this.mark++;
+                if (this.mark === 4) {
+                    this.mark = 0
+                    return
+                }
+            },
+            play() {
+                setInterval(this.autoPlay, 2000)
+            }
+        }
+    })
+</script>
+</html>

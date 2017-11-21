@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+<body>
+    <button id="but">弹出框</button>
+    <div class="box" id="box">
+        <span id="coo">×</span>     
+        <p id="tit"></p>
+        <div id="main" class="main"></div>
+        <p class="btn"><button id="open"></button><button id="close"></button></p>
+    </div>
+</body>
+<script src="js/jquery1.1.js"></script>
+<script>
+    class Dialog{
+        constructor () {
+            this.coo = document.getElementById("coo");
+            this.box = document.getElementById("box");
+            this.tit = document.getElementById("tit");
+            this.main = document.getElementById("main");
+            this.open = document.getElementById("open");
+            this.close = document.getElementById("close");
+            this.but = document.getElementById('but');
+            
+            this.closed();
+            this.opens();
+            this.destoyed();
+            this.shows();
+        }
+        shows (title,con,open,close) {
+            this.but.addEventListener('click', () => {
+                $(this.box).css('display', 'block'); 
+                $(this.tit).html(title);
+                $(this.main).html(con);
+                $(this.open).html(open);
+                $(this.close).html(close);
+            });
+        }
+        opens () {
+            var that = this;
+            // console.log(title)
+            this.open.addEventListener('click', () => {
+                $(this.box).css('display', 'none');
+            })
+
+        }
+        closed () {
+            this.close.addEventListener('click', () => {
+                $(this.box).css('display', 'none');
+            })
+        }
+        destoyed () {
+            this.coo.addEventListener('click', () => {
+                $(this.box).remove();
+            }) 
+        }
+    };
+    let dialog = new Dialog();
+
+    $.ajax({
+        url: 'js/data.json',
+        method: 'GET',
+        success: function (data) {
+            // console.log(data.title);
+            dialog.shows(data.title, data.con, data.open, data.close);
+        }
+    })
+</script>
+</html> 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="slide-box">
+        <!-- <ul>
+            <li><img src="images/flash1.jpg" alt=""></li>
+            <li><img src="images/flash2.jpg" alt=""></li>
+            <li><img src="images/flash3.jpg" alt=""></li>
+            <li><img src="images/flash4.jpg" alt=""></li>
+            <li><img src="images/flash5.jpg" alt=""></li>
+            <li><img src="images/flash6.jpg" alt=""></li>
+        </ul>
+        <ol>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ol>
+        <div class="leftBtn btn"><</div>
+        <div class="rightBtn btn">></div> -->
+    </div>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/slider.js"></script>
+    <script>
+        var slider = new Slider ({
+            pagination: true,
+            autoplay: true,
+            index: 3,
+            ele: 'slide-box',
+            mouseEvent: true,
+            clickEvent: true,
+            speed: 1000
+        });
+    </script>
+</body>
+</html>

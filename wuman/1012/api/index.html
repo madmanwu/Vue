@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 单行文本 -->
+        <!-- <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p> -->
+
+        <!-- 多行文本 -->
+        <!-- <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="add multiple lines"></textarea> -->
+
+        <!-- 单个勾选框 -->
+        <!-- <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label> -->
+
+        <!-- 多个勾选框 -->
+        <!-- <div id='example-3'>
+            <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+            <label for="jack">Jack</label>
+            <input type="checkbox" id="john" value="John" v-model="checkedNames">
+            <label for="john">John</label>
+            <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+            <label for="mike">Mike</label>
+            <br>
+            <span>Checked names: {{ checkedNames }}</span>
+        </div> -->
+
+        <!-- 单选框 -->
+        <!-- <div id="example-4">
+            <input type="radio" id="one" value="One" v-model="picked">
+            <label for="one">One</label>
+            <br>
+            <input type="radio" id="two" value="Two" v-model="picked">
+            <label for="two">Two</label>
+            <br>
+            <span>Picked: {{ picked }}</span>
+        </div> -->
+
+        <!-- select选择列表 -->
+
+        <!-- <div id="example-5">
+            <select v-model="selected">
+                <option disabled value="">请选择</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <span>Selected: {{ selected }}</span>
+        </div> -->
+
+        <!-- 多选列表 (绑定到一个数组)： -->
+
+        <!-- <div id="example-6">
+            <select v-model="selected" multiple style="width: 50px;">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <br>
+            <span>Selected: {{ selected }}</span>
+        </div> -->
+
+        <!-- 动态选项，用 v-for 渲染： -->
+        <!-- <select v-model="selected">
+            <option v-for="i in options" v-bind:value="i.value">
+                {{ i.text }}
+            </option>
+            </select>
+        <span>Selected: {{ selected }}</span> -->
+
+        <!-- 值绑定 -->
+        <!-- 当选中时，`picked` 为字符串 "a" -->
+        <!-- <input type="radio" v-model="picked" value="a"> -->
+        <!-- `toggle` 为 true 或 false -->
+        <!-- <input type="checkbox" v-model="toggle"> -->
+        <!-- 当选中时，`selected` 为字符串 "abc" -->
+        <!-- <select v-model="selected">
+            <option value="abc">ABC</option>
+        </select> -->
+
+        <!-- 方法事件处理器 -->
+        <!-- <div id="example-2"> -->
+            <!-- `greet` 是在下面定义的方法名 -->
+            <!-- <button v-on:click="greet">Greet</button> -->
+        <!-- </div> -->
+
+        <!-- 内联处理器里的方法 -->
+        <!-- <div id="example-3">
+            <button v-on:click="say('hi')">Say hi</button>
+            <button v-on:click="say('what')">Say what</button>
+        </div> -->
+
+        <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+            Submit
+        </button>
+    </div>
+</body>
+<script type="text/javascript" src="./vue.min.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            message: '',
+            checked: false,
+            checkedNames: [],
+            picked: '',
+            selected: '',
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ],
+            name: 'Vue.js'
+        },
+        methods: {
+            greet () {
+                alert('hello' + this.name + '!');
+                if(event) {
+                    alert(event.terget.tagName);
+                }
+            },
+            say (message) {
+                alert(message);
+            },
+            warn (message, event) {
+                alert(message);
+            }
+        }
+    })
+</script>
+</html>

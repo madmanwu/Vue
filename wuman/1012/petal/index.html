@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+    <div id="app">
+        
+        <!-- <div class="wrap" v-show="sho">
+            <i class="fa fa-bars"></i>
+            <img src="images/img/bg.jpg" alt="">
+            <p>花瓣，陪你过生活的设计师</p>
+            <div class="search">
+                <div>
+                    <input type="text" placeholder="搜索你喜欢的" v-model="str"><i class="fa fa-search" v-on:click="shows"></i>
+                </div>
+            </div>
+        </div> -->
+
+
+        <!-- <header>
+            <p>
+                <img src="images/icon/icon.jpg" alt="">
+                发现
+            </p>
+            <p>
+                <i class="fa fa-search" @click="shows"></i>
+                <i class="fa fa-bars"></i>
+            </p>
+        </header> -->
+        <!-- <section>
+            <p class="family">大家正在关注</p>
+
+            <div class="banner swiper-container">
+                <div class="swiper-wrapper">
+                    <banner 
+                    v-for="i in slideImg"
+                    :v="i"
+                    :key="i.id"
+                    ></banner>
+                </div>
+            </div>
+
+            <p class="family">为您推荐</p>
+            <ul class="list">
+                <slide-down
+                v-for="i in banner"
+                :value="i"
+                :key="i.id"
+                ></slide-down>
+            </ul>
+        </section> -->
+    </div>
+</body>
+<!-- <script type="text/javascript" src="./vue.min.js"></script> -->
+<!-- <script type="text/javascript" src="css/swiper.min.js"></script>
+<script type="text/javascript">
+
+    setTimeout(function(){
+        new Swiper(".swiper-container",{
+            autoplay: 1000,
+            loop: true
+        })
+    },400)
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            banner: [
+                {
+                    imgone: 'images/img/img1.jpg',
+                    imgtwo: 'images/img/img12.jpg'
+                },
+                {
+                    imgone: 'images/img/img2.jpg',
+                    imgtwo: 'images/img/img22.jpg'
+                },
+                {
+                    imgone: 'images/img/img3.jpg',
+                    imgtwo: 'images/img/img32.jpg'
+                },
+                {
+                    imgone: 'images/img/img4.jpg',
+                    imgtwo: 'images/img/img42.jpg'
+                },
+                {
+                    imgone: 'images/img/img5.jpg',
+                    imgtwo: 'images/img/img52.jpg'
+                },
+                {
+                    imgone: 'images/img/img6.jpg',
+                    imgtwo: 'images/img/img62.jpg'
+                }
+            ],
+            slideImg: [
+                {
+                    img: 'images/banner/ban1.jpg',
+                    img1: 'images/banner/ban2.jpg',
+                    img2: 'images/banner/ban3.jpg',
+                    img3: 'images/banner/ban4.jpg',
+                    img4: 'images/banner/ban5.jpg',
+                    img5: 'images/banner/ban6.jpg'
+                },
+                {
+                    img: 'images/banner/ban1.jpg',
+                    img1: 'images/banner/ban2.jpg',
+                    img2: 'images/banner/ban3.jpg',
+                    img3: 'images/banner/ban4.jpg',
+                    img4: 'images/banner/ban5.jpg',
+                    img5: 'images/banner/ban6.jpg'
+                }
+            ],
+            sho: true,
+            str: ''
+        },
+        components: {
+            // 组件名称
+            'slide-down': {
+                props: ['value'],
+                template: `
+                <li>
+                    <p class="first"><img :src="value.imgone" alt=""></p>
+                    <p class="second"><img :src="value.imgtwo" alt=""></p>
+                </li>
+                `
+            },
+            'banner': {
+                props: ['v'],
+                template: `
+                <div class="swiper-slide">
+                    <p><img :src="v.img" alt=""></p>
+                    <p><img :src="v.img1" alt=""></p>
+                    <p><img :src="v.img2" alt=""></p>
+                    <p><img :src="v.img3" alt=""></p>
+                    <p><img :src="v.img4" alt=""></p>
+                    <p><img :src="v.img5" alt=""></p>
+                </div>
+                `
+            }
+        },
+        methods: {
+            shows () {
+                if(this.str === ''){
+                    alert('输入内容为空！');
+                } else {
+                    this.sho =! this.sho
+                }
+            },
+            fn () {
+                if(this.str === ''){
+                    alert('输入内容为空！');
+                }
+            }
+        }
+    })
+</script> -->
+</html>

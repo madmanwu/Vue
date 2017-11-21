@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-child
+        v-for="i in arr"
+        :todo="i"
+        :key="i.id"
+        >
+            <template>
+                <li>{{i.text}}</li>
+            </template>
+        </my-child>
+    </div>
+</body>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript">
+    Vue.component('my-child', {
+        props: ['todo'],
+        template: `
+        <div>
+            <h3>{{todo.text}}</h3>
+            <slot text="footer" :data-id="a">slot名字叫footer</slot>
+        </div>`,
+        data () {
+            return {
+                a: 18
+            }
+        }
+    }) 
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true,
+            arr: [
+                {
+                    id: 0,
+                    text: '任务1'
+                },{
+                    id: 1,
+                    text: '任务2'
+                },{
+                    id: 2,
+                    text: '任务3'
+                }
+            ]
+        }
+    })
+</script>
+</html>

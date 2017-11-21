@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-button></my-button>
+    </div>
+</body>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript">
+    const son = {
+        props: ['deliver'],
+        template: `
+        <button>{{deliver}}</button>`
+    }
+    /* Vue.component('my-button', {
+        props: ['deliver'],
+        template: `
+        <button>{{deliver}}</button>
+        `
+    }) */
+    const mybutton = {
+        data () {
+            return {
+                message: '把我传给子组件'
+            }
+        },
+        template: `
+        <div>我是父组件<my-son :deliver="message"></my-son></div>
+        `,
+        components: {
+            'my-son': son
+        }
+    }
+    Vue.component('my-button', mybutton)
+
+    const vm = new Vue({
+        el: '#app'/* ,
+        data: {
+            message: '把我传给子组件'
+        } */
+    })
+</script>
+</html>

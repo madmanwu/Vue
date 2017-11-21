@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="css/swiper.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="css/reset.css"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+</head>
+<body id="id">
+    <div class="box">
+        <p><img src="images/img1.jpg" alt=""></p>
+        <p><img src="images/img2.jpg" alt=""></p>
+    </div>
+</body>
+<script src="js/jquery.js"></script>
+<script>
+
+var url = ["images/img3.jpg", "images/img4.jpg","images/img5.jpg", "images/img6.jpg", "images/img7.jpg", "images/img8.jpg", "images/img9.jpg", "images/img10.jpg"];
+
+
+var box = document.getElementsByClassName('box')[0];
+var ps = box.getElementsByTagName('p')[0];
+var imgh = document.getElementsByTagName('img')[0].height;
+var y = 0;
+var x = 0;
+
+box.addEventListener('touchstart', (e) => {
+    y = e.touches[0].clientY;
+});
+box.addEventListener('touchend', (e) => {
+    y = y - e.changedTouches[0].clientY;
+    if (y >= imgh + imgh/2) {
+        loadImageAsync(url[x]);
+        if (x === 2) {
+            x = -1;
+        }
+        loadImageAsync(url[++x]);
+        if(x === 2) {
+            x = 0;
+        } else {
+            x++;
+        }
+    }
+});
+
+function loadImageAsync (url) {
+    return new Promise((resolve, reject) => {
+        var image = new Image();
+        
+        image.onload = function () {
+            resolve(image);
+        };
+        
+        image.onerror = function () {
+            reject(new Error('Could not load image at ' + url));
+        };
+
+        image.src = url;
+
+        ps.appendChild(image);
+        box.appendChild(ps);
+    });
+};
+</script>   
+</html>

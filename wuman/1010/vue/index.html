@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background: pink;
+        }
+        button{
+            outline: none;
+            border: none;
+            font-size: 10px;
+            color: #fff;
+        }
+        .red{
+            background: red;
+        }
+        .green{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='str' v-on:keyup.enter='focusChange'>
+
+        <button v-bind:class="{'red': isA, 'green': !isA}" @click='toggle'>{{name?'点击绿色':'点击红色'}}</button>
+        
+        <ul>
+            <li v-for='(v, k) in arr'>{{v}}<span v-on:click='removeArr(k)'><button>删除</button></span></li>
+            
+        </ul>
+        <div>
+            <input type="text" v-model='name' >{{name}}
+
+            <button v-on:click='fn(999)'>弹出框</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            name: true,
+            str: '',
+            isA: false,
+            obj: {
+                pid: 10,
+                uid: 20
+            },
+            arr: [1, 2, 3]
+        },
+        methods: {
+            fn (num) {
+                alert(num);
+                this.name =! this.name;
+                if(this.str === ''){
+                    console.log('输入内容为空！');
+                } else {
+                    this.arr.push(this.str);
+                    this.str = '';
+                }
+            },
+            focusChange () {
+                this.arr.push(this.str);
+                this.str = '';
+            },
+            mouse () {
+                this.arr.push(this.str);
+                this.str = '';
+            },
+            removeArr (k) {
+                this.arr.splice(k, 1);
+            },
+            toggle () {
+                this.isA =! this.isA;
+            }
+        }
+    })
+</script>
+</html>

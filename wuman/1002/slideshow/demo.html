@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{ margin:0; padding:0;}
+        #box{ width:500px; height:300px; position:absolute; overflow: hidden; margin: auto;}
+        #ul1{ list-style: none; height:300px; position:relative;}
+        #ul1 li{ width:500px; height:300px; float:left;}
+        #ul1 li img{ width: 500px; height: 300px;}
+        #ul2{ position:absolute; bottom:0px; left:0px; list-style: none;}
+        #ul2 li{ float:left; width:20px; height:20px; margin:10px; background:black; opacity:0.7;text-align: center; line-height: 20px; color:#fff;}
+        #ul2 li.active{ background:red;}
+        #left{ color:#fff; position:absolute; left:8px; top:150px;background:black; opacity:0.7;}
+        #right{ color:#fff; position:absolute; top:150px; margin-left: 480px;background:black; opacity:0.7;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id='ul1'>
+            <li><img src="images/img0.jpg" alt=""></li>
+            <li><img src="images/img1.jpg" alt=""></li>
+            <li><img src="images/img2.jpg" alt=""></li>
+            <li><img src="images/img3.jpg" alt=""></li>
+            <li><img src="images/img4.jpg" alt=""></li>
+            <li><img src="images/img5.jpg" alt=""></li>
+            <li><img src="images/img6.jpg" alt=""></li>
+            <li><img src="images/img7.jpg" alt=""></li>
+            <li><img src="images/img8.jpg" alt=""></li>
+            <li><img src="images/img9.jpg" alt=""></li>
+        </ul>
+        <ol id='ul2'>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+        </ol>
+
+        <p alt="" id='left'>＜</p>
+        <p alt="" id='right'>＞</p>
+    </div>
+</body>
+<script>
+    class Slidedown {
+        constructor () {
+            this.ul1= document.getElementById('ul1');
+            this.ul2= document.getElementById('ul2');
+            this.lis1 = this.ul1.getElementsByTagName('li');
+            this.lis2 = this.ul2.getElementsByTagName('li');
+            this.box = document.getElementById('box');
+            this.left = document.getElementById('left');
+            this.right = document.getElementById('right');
+            this.timer=null;
+            this.ul2Li = this.ul2.getElementsByTagName('li');
+            this.ul2Li[0].className = "active";
+            //初始化
+            //取每一个li的宽度
+            this.lisW = this.lis1[0].offsetWidth;
+            
+            this.lisLength = this.lis1.length;
+            //给ul设置宽度
+		    this.ul1.style.width = this.lisW * this.lisLength + 'px';
+            this.count = 0;
+
+            this.init();
+        }
+        init () {
+            this.rightBtn();
+            this.leftBtn();
+            this.auto();
+            this.mouses();
+            this.indexs();
+        }
+        
+        /* inde () {
+            //创建轮播图下标
+            for(var i = 0; i <this.lisLength; i++){
+                this.newli = document.createElement('li');
+                this.newli.innerHTML=i+1;
+                this.ul2.appendChild(this.newli);
+            }
+            this.ul2Li = this.ul2.getElementsByTagName('li');
+            this.ul2Li[0].className = "active";
+        }*/
+
+        change () {
+            this.ul1.style.left = -(this.count * this.lisW)+'px';
+
+            for(var i = 0; i < this.ul2Li.length; i++){
+                this.ul2Li[i].className = '';
+            }
+            this.ul2Li[this.count].className = 'active';
+        }
+
+        indexs () {
+            var that = this;
+            for(var i = 0;i < this.ul2Li.length; i++){
+                this.ul2Li[i].index = i;
+                this.ul2Li[i].onclick = function () {
+                    that.count = this.index;
+                    that.change();
+                }
+                
+            } 
+        }
+
+        auto () {
+            var that = this;
+            clearInterval(this.timer);
+            this.timer = setInterval(() => {
+                that.count++;
+                if(that.count > that.lisLength-1){
+                    that.count=0;
+                }
+                that.change(that.count);
+            },1000)
+        }
+
+        mouses () {
+            var that = this;
+            this.box.onmouseover = () => {
+                clearInterval(that.timer);
+            }
+            this.box.onmouseout = () => {
+                that.auto();
+            }
+        }
+
+        rightBtn () {
+            var that = this;
+            this.right.onclick = () => {
+                //count下一张
+                that.count++;
+                if(that.count > that.lisLength-1){
+                    that.count = 0;
+                }
+                that.change(that.count);
+            }
+        }
+
+        leftBtn () {
+            var that = this;
+            this.left.onclick = () => {
+                //count上一张
+                that.count--;
+                if(that.count < 0){
+                    that.count = that.lisLength-1;
+                }
+                that.change();
+            }
+        }
+    };
+    var slidedown = new Slidedown();
+</script>
+</html>

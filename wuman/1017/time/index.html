@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        button {
+            width: 100px;
+            height: 50px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="send">
+            <span v-if="flag">{{time+'秒后获取'}}</span>
+            <span v-if="!flag">send</span>
+        </button>
+    </div>
+</body>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript">
+var vm = new Vue({
+    el: '#app',
+    data () {
+        return {
+            time: 3, // 发送验证码倒计时
+            flag: false
+        }
+    },
+    methods: {
+        send () {
+            let me = this;
+            me.flag = true;
+            let interval = window.setInterval( () => {
+                if((me.time--) <= 0) {
+                    me.time = 3;
+                    me.flag = false;
+                    window.clearInterval(interval);
+                }
+            }, 1000);
+        }
+    }
+});
+
+</script>
+</html>

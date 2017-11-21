@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <my-banner :list='imgList'>
+            <template slot='olist' scope='props'>
+                <ol class="ols">
+                    <!-- :class="count === k? 'active': ''" -->
+                    <li v-for='(v, k) in props.text.length' @click="props.arrow(k)"></li>
+                </ol>
+                <div slot='btn' class="clickBtn">
+                    <span id="left" @click='props.prev'><</span>
+                    <span id="right" @click='props.next'>></span>
+                </div>
+            </template>
+        </my-banner>
+    </div>
+</body>
+<script src="./vue.min.js"></script>
+<script>
+    
+    Vue.component('my-banner', {
+        props: ['list'],
+        template: `<div class='banner' @mouseover='mouseOver' @mouseout='mouseOut'>
+                        <div class='imgs' ref='imgs'>
+                            <img :src='v.imgSrc' v-for='(v, k) in list' ref='imgW'>
+                        </div>
+                        <slot name='olist' :text='list' :prev='prev' :next='next' :arrow='shows'>
+                            <slot name='btn'></slot>
+                        </slot>
+                   </div>`,
+        data () {
+            return {
+                count: 0,
+                timer: null
+            }
+        },
+        mounted () {
+            this.ols = document.getElementsByClassName('ols')[0];
+            this.indexList = this.ols.getElementsByTagName('li');
+            this.indexList[0].className = 'active';
+            this.autoPlay();
+        },
+        methods: {
+            autoPlay () {
+                let that = this;
+                this.timer = setInterval(() => {
+                    that.next();
+                }, 1500)
+            },
+            shows (count) {
+                this.count = count;
+                this.$refs.imgs.style.marginLeft = (-this.count * this.$refs.imgW[0].offsetWidth) + 'px';
+                for (let i = 0; i < this.indexList.length; i++) {
+                    this.indexList[i].className = '';
+                }
+                this.indexList[this.count].className = 'active';
+            },
+            next () {
+                this.count++;
+                if ( this.count >= this.list.length ) {
+                    this.count = 0;
+                }
+                this.shows(this.count);
+            },
+            prev () {
+                this.count--;
+                if ( this.count < 0 ) {
+                    this.count = this.list.length - 1;
+                }
+                this.shows(this.count);
+            },
+            mouseOver () {
+                clearInterval(this.timer);
+            },
+            mouseOut () {
+                this.autoPlay();
+            }
+        }
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            imgList: [
+                {'imgSrc': './image/1.jpg'},
+                {'imgSrc': './image/2.jpg'},
+                {'imgSrc': './image/3.jpg'}
+            ]
+        }
+    })
+</script>
+</html>

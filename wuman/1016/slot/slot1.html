@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <el-slider :imgs="imgs">
+        </el-slider>
+        <my-child :arr="arr" ref="mychild">
+            <template scope="msg">
+                <li>{{msg.text}}</li>
+            </template>
+        </my-child>
+        
+        <p ref="myP">
+            title
+        </p>
+        <button @click="getDom">
+            get Dom
+        </button>
+
+        <keep-alive>
+            <component :is="currentView">
+                fsafsafsafsaf
+            </component>
+        </keep-alive>
+
+        <button @click="changeCom('home')">
+            home
+        </button>
+        <button @click="changeCom('list')">
+            list
+        </button>
+
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+Vue.component('my-child', {
+    props: ['arr'],
+    template: `
+        <ul>
+            <slot v-for="i in arr" :text="i.text">
+            </slot>
+        </ul>    
+    `,
+    data () {
+        return {
+            a: 18,
+            flag: true
+        }
+    }
+})
+const vm = new Vue({
+    el: '#app',
+    data: {
+        flag: true,
+        arr: [
+            {
+                id: 0,
+                text: '任务1'
+            },
+            {
+                id: 1,
+                text: '任务2'
+            },
+            {
+                id: 2,
+                text: '任务3'
+            }
+        ],
+        currentView: ''
+    },
+    methods: {
+        getDom () {
+            this.$refs.myP.style.color = 'red'
+        },
+        changeCom (str) {
+            this.currentView = str
+        }
+    },
+    components: {
+        home: {
+            created () {
+                console.log('created')
+            },
+            activated () {
+                console.log('activated')
+            },
+            deactivated () {
+                console.log('deactivated')
+            },
+            template: '<div>home</div>'
+        },
+        list: {
+            created () {
+                console.log('created')
+            },
+            activated () {
+                console.log('activated')
+            },
+            deactivated () {
+                console.log('deactivated')
+            },
+            template: '<div>list</div>'
+        }
+    }
+})
+</script>
+</html>

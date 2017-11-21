@@ -1,0 +1,35 @@
+body{
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    font-size: 0.12rem;
+    flex-direction: column;
+    background: #FFF;
+    position: relative;
+}
+header{
+    display: flex;
+    padding: 0.08rem;
+    border-bottom: 0.01rem solid #eaeaea;
+    justify-content: space-between;
+}
+header p{
+    display: flex;
+    height: 0.2rem;
+    align-items: center;
+    font-size: 0.14rem;
+} 
+p i:nth-child(1){
+    color: #999;
+    padding-left: 0.14rem;
+    padding-right: 0.2rem;
+}
+p i:nth-child(2){
+    color: #999;
+    padding-left: 0.14rem;
+}
+p img{
+    padding-right: 0.14rem;
+}

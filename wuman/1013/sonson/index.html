@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .select-box{
+            width: 300px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid #CCc;
+            position: relative;
+        }
+        .arrow{
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #000; 
+            display: inline-block;
+            position: absolute;
+            right: 10px;
+            top: 20px;
+            cursor: pointer;
+        }
+        .select-content{
+            width: 300px;
+            height: auto;
+            background: pink;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-select></my-select>
+    </div>
+</body>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript">
+    const bus = new Vue({});
+    const myOption = {
+        props: ['v'],
+        template: '<p @click="changeVal">{{v.title}}</p>',
+        mounted () {
+            bus.$on('changeStr', function (data) {
+                console.log(data);
+            })
+        },
+        methods: {
+            changeVal () {
+                this.$emit('changedVal',this.v.title);
+                bus.$emit('事件', '获取');
+            }
+        }
+    }
+    const myBtn = {
+        mounted () {
+            bus.$on('事件', function (data) {
+                console.log(data);
+            })
+        },
+        methods: {
+            changeStr () {
+                bus.$emit('changeStr', '修改后的内容');
+            }
+        },
+        template: `
+        <button @click="changeStr">change<button>
+        `
+    }
+    const mySelect = {
+        data () {
+            return {
+                flag: false,
+                selectVal: 'default',
+                todoList: [
+                    {
+                        id: 0,
+                        title: '任务一'
+                    },
+                    {
+                        id: 1,
+                        title: '任务二'
+                    },
+                    {
+                        id: 2,
+                        title: '任务三'
+                    },
+                ]
+            }
+        },
+        methods: {
+            change () {
+                this.flag = !this.flag
+            },
+            changes (str) {
+                this.selectVal = str;
+                this.flag = !this.flag
+            }
+        },
+        // 注册一个子组件
+        components: {
+            'my-option': myOption,
+            'my-btn': myBtn
+        },
+        template: `<div class="select-box">{{selectVal}}<span class="arrow" @click="change"></span><div class="select-content" v-show=flag>
+                <my-option 
+                v-for='(v, k) in todoList'
+                :v='v'  
+                :key='k'
+                @changedVal="changes"
+                ></my-option>
+
+                <my-btn></my-btn>
+            </div>
+        </div>`
+    }
+    Vue.component('my-select', mySelect)
+
+    const vm = new Vue({
+        el: '#app'
+    })
+</script>
+</html>

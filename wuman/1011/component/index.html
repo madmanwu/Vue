@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <my-child></my-child>
+        <button @click="fn">实例</button>
+    </div>
+</body>
+<script type="text/javascript" src="./vue.min.js"></script>
+<script type="text/javascript">
+    
+    const mychild = {
+        template: '<div>my-child<button @click="fn">child</button></div>',
+        methods: {
+            fn () {
+                console.log(999)
+            }
+        }
+    }
+    // 全局注册父组件
+    Vue.component('my-component', {
+        template: '<div>my-component<button @click="fn">component</button><my-child></my-child></div>',
+        // 接收要注册的组件
+        components: {
+            'my-child': mychild
+        },
+        methods: {
+            fn () {
+                console.log(this.msg)
+            }
+        },
+        data () {
+            return {
+                msg: 'component'
+            }
+        }
+    })
+    
+    /* Vue.component('my-child', {
+        template: '<div>my-child</div>'
+    }) */
+    // 根级组件的实例
+    const vm = new Vue({
+        el: '#app', // 唯一
+        data: {
+            msg: '实例的msg'
+        },
+        methods: {
+            fn () {
+                console.log(this.msg)
+            }
+        }
+    })
+</script>
+</html>
